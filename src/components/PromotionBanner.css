@@ -1,0 +1,207 @@
+/* Promotion Showcase - Unique CrunchMe Design */
+.promotion-showcase-section {
+  padding: var(--space-24) 0;
+  background: var(--color-bg-primary);
+  border-top: 1px solid rgba(62, 39, 35, 0.2);
+  border-bottom: 1px solid rgba(62, 39, 35, 0.2);
+}
+
+.promotion-showcase-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--space-6);
+}
+
+.promotion-showcase-card {
+  background: rgba(62, 39, 35, 0.2);
+  border: 2px solid rgba(255, 255, 255, 0.15);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  transition: all var(--transition-base);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+.promotion-showcase-card:hover {
+  border-color: rgba(196, 214, 0, 0.4);
+  background: rgba(62, 39, 35, 0.3);
+  transform: translateY(-4px);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.5);
+}
+
+.promotion-visual {
+  position: relative;
+  min-height: 450px;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.promotion-image-frame {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-8);
+}
+
+.promotion-showcase-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transition: transform var(--transition-slow);
+}
+
+.promotion-showcase-card:hover .promotion-showcase-image {
+  transform: scale(1.05);
+}
+
+.promotion-placeholder-frame {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-bg-secondary);
+}
+
+.placeholder-text {
+  font-family: var(--font-heading);
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.promotion-info {
+  padding: var(--space-12) var(--space-10);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--space-5);
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.promotion-category {
+  font-family: var(--font-heading);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-pink);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+}
+
+.promotion-heading {
+  font-family: var(--font-heading);
+  font-size: clamp(1.75rem, 3vw, 2.5rem);
+  font-weight: var(--font-weight-black);
+  color: var(--color-white);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.promotion-text {
+  font-family: var(--font-body);
+  font-size: clamp(1rem, 1.2vw, 1.125rem);
+  color: var(--color-text-secondary);
+  line-height: 1.7;
+  margin: 0;
+}
+
+.promotion-highlight {
+  font-family: var(--font-heading);
+  font-size: clamp(1.25rem, 2vw, 1.75rem);
+  font-weight: var(--font-weight-black);
+  color: var(--color-lime);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: var(--space-4) 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.promotion-cta {
+  display: inline-block;
+  padding: var(--space-4) var(--space-10);
+  background-color: var(--color-lime);
+  color: var(--color-bg-primary);
+  font-family: var(--font-heading);
+  font-weight: var(--font-weight-black);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  text-decoration: none;
+  border-radius: var(--radius-sm);
+  border: 2px solid var(--color-lime);
+  transition: all var(--transition-base);
+  font-size: var(--font-size-sm);
+  align-self: flex-start;
+  margin-top: var(--space-2);
+}
+
+.promotion-cta:hover {
+  background-color: var(--color-white);
+  color: var(--color-bg-primary);
+  border-color: var(--color-white);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255, 255, 255, 0.2);
+}
+
+.promotion-nav {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-3);
+  margin-top: var(--space-10);
+}
+
+.nav-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, 0.2);
+  cursor: pointer;
+  transition: all var(--transition-base);
+  padding: 0;
+}
+
+.nav-dot:hover {
+  background: rgba(255, 255, 255, 0.4);
+  transform: scale(1.2);
+}
+
+.nav-dot.active {
+  background: var(--color-lime);
+  width: 40px;
+  border-radius: 6px;
+}
+
+@media (max-width: 968px) {
+  .promotion-showcase-card {
+    grid-template-columns: 1fr;
+  }
+
+  .promotion-visual {
+    min-height: 350px;
+  }
+
+  .promotion-info {
+    padding: var(--space-10) var(--space-8);
+  }
+}
+
+@media (max-width: 640px) {
+  .promotion-showcase-section {
+    padding: var(--space-16) 0;
+  }
+
+  .promotion-info {
+    padding: var(--space-8) var(--space-6);
+  }
+}

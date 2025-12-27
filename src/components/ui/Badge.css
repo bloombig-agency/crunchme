@@ -1,0 +1,29 @@
+.badge {
+  display: inline-block;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  border-radius: var(--radius-sm);
+}
+
+.badge-default {
+  background: var(--bg-secondary);
+  color: var(--text-secondary);
+}
+
+.badge-primary {
+  background: var(--text-primary);
+  color: var(--bg-primary);
+}
+
+.badge-outline {
+  border: var(--border-light);
+  color: var(--text-secondary);
+  background: transparent;
+}
+
+
+
+
