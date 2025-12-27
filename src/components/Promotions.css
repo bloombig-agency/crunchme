@@ -1,0 +1,120 @@
+.promotions-banner {
+  position: relative;
+  background: var(--color-pink);
+  border-bottom: 3px solid var(--color-pink);
+  padding: var(--space-4) var(--space-6);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  overflow: hidden;
+  box-shadow: var(--shadow-pink);
+}
+
+
+.promo-content {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  flex: 1;
+  justify-content: center;
+  animation: slideIn 0.5s ease-out;
+}
+
+.promo-icon {
+  font-size: 1.25rem;
+  color: var(--color-lime);
+  display: flex;
+  align-items: center;
+}
+
+.promo-text {
+  font-size: var(--font-size-sm);
+  color: var(--color-white);
+  text-align: center;
+  font-weight: var(--font-weight-semibold);
+}
+
+.promo-highlight {
+  font-weight: var(--font-weight-black);
+  color: var(--color-white);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.promo-indicators {
+  display: flex;
+  gap: var(--space-2);
+}
+
+.promo-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, 0.4);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  padding: 0;
+}
+
+.promo-dot.active {
+  background: var(--color-pink);
+  width: 20px;
+  border-radius: 3px;
+}
+
+.promo-close {
+  background: transparent;
+  border: none;
+  color: var(--color-white);
+  cursor: pointer;
+  padding: var(--space-2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity var(--transition-fast);
+  font-size: 1.25rem;
+  opacity: 0.8;
+}
+
+.promo-close:hover {
+  opacity: 1;
+  color: var(--color-pink);
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@media (max-width: 768px) {
+  .promotions-banner {
+    flex-direction: column;
+    gap: var(--space-2);
+    padding: var(--space-3);
+  }
+
+  .promo-content {
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .promo-text {
+    font-size: var(--font-size-xs);
+  }
+
+  .promo-close {
+    position: absolute;
+    top: var(--space-2);
+    right: var(--space-2);
+  }
+}
