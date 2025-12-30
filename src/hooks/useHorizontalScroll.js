@@ -36,3 +36,4 @@ export const useHorizontalScroll = (itemSelector = '.product-scroll-item') => {
 
 
 
+
