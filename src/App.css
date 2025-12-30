@@ -1,18 +1,28 @@
 .app {
   width: 100%;
   min-height: 100vh;
+  min-height: 100dvh;
   background: var(--color-bg-primary);
   color: var(--color-text-primary);
   transition: background-color var(--transition-base), color var(--transition-base);
   position: relative;
 }
 
-/* Smooth scroll reveal animations */
+main {
+  scroll-snap-type: y proximity;
+  scroll-padding-top: 80px;
+}
+
+main > section {
+  scroll-snap-align: start;
+  scroll-snap-stop: normal;
+}
+
+/* Viewport Animation Base Styles */
 @keyframes fadeIn {
   from {
     opacity: 0;
   }
-
   to {
     opacity: 1;
   }
@@ -21,12 +31,122 @@
 @keyframes fadeInUp {
   from {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(30px);
   }
-
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Base animation classes for viewport triggers */
+/* All sections start hidden and animate in - but pages handle their own animations */
+main > section:not(.shop-page):not(.product-detail-page):not(.cart-page):not(.checkout-page) {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+main > section:not(.shop-page):not(.product-detail-page):not(.cart-page):not(.checkout-page).is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Ensure header, navbar, footer, and ticker are always visible - no viewport animations */
+header,
+header .section,
+header section,
+.section,
+.navbar,
+.header__inner-content,
+.header__menu,
+.header__menu-items,
+footer,
+.footer-section,
+.scrolling-ticker,
+.scrolling-ticker * {
+  opacity: 1 !important;
+  transform: none !important;
+  transition: none !important;
+}
+
+/* Staggered animation delays for child elements */
+[class*="is-visible"] > * {
+  transition-delay: 0.1s;
+}
+
+[class*="is-visible"] > *:nth-child(2) {
+  transition-delay: 0.2s;
+}
+
+[class*="is-visible"] > *:nth-child(3) {
+  transition-delay: 0.3s;
+}
+
+[class*="is-visible"] > *:nth-child(4) {
+  transition-delay: 0.4s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  section,
+  section.is-visible,
+  .product-showcase-card,
+  .product-showcase-card.is-visible,
+  .featured-card-innovative,
+  .featured-card-innovative.is-visible,
+  .nutrition-card,
+  .nutrition-card.is-visible,
+  .feature-card,
+  .feature-card.is-visible,
+  .feature-item,
+  .feature-item.is-visible {
+    opacity: 1;
+    transform: none;
+    transition: none;
   }
 }
 
@@ -35,7 +155,7 @@ section {
   position: relative;
 }
 
-/* Elegant transitions */
-* {
+/* Elegant transitions - exclude header/navbar elements */
+*:not(header):not(header *):not(.section):not(.navbar):not(.header__*):not(footer):not(footer *) {
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }

@@ -16,9 +16,10 @@
   right: 0;
   background: rgba(5, 5, 5, 0.95);
   border-bottom: 1px solid rgba(62, 39, 35, 0.4);
-  transition: all var(--transition-base);
   backdrop-filter: blur(20px);
   z-index: var(--z-fixed);
+  opacity: 1 !important;
+  transform: none !important;
 }
 
 
@@ -47,6 +48,8 @@
 
 .section {
   position: relative;
+  opacity: 1 !important;
+  transform: none !important;
 }
 
 .is-width-wide {
@@ -138,7 +141,6 @@
 .header__logo {
   display: inline-block;
   text-decoration: none;
-  transition: opacity var(--transition-base);
 }
 
 .header__logo:hover {
@@ -162,12 +164,10 @@
   max-width: 220px;
   object-fit: contain;
   display: block;
-  transition: all var(--transition-base);
   filter: drop-shadow(0 2px 4px rgba(27, 0, 0, 0.1));
 }
 
 .header__logo:hover .logo-image {
-  transform: scale(1.05);
   filter: drop-shadow(0 4px 8px rgba(255, 23, 68, 0.2));
 }
 
@@ -251,7 +251,6 @@
   text-transform: uppercase;
   letter-spacing: 0.2em;
   padding: var(--space-2) var(--space-3);
-  transition: all var(--transition-base);
   display: inline-block;
   position: relative;
 }
@@ -341,7 +340,6 @@
   text-decoration: none;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  transition: color var(--transition-base);
 }
 
 .mega-menu__linklist-link:hover {
@@ -363,7 +361,6 @@
   align-items: center;
   color: var(--color-white);
   text-decoration: none;
-  transition: color var(--transition-base);
 }
 
 .header__link:hover {
@@ -373,6 +370,12 @@
 .action-area__link {
   padding: var(--space-2);
   cursor: pointer;
+  background: none;
+  border: none;
+  color: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .icon {
@@ -385,6 +388,31 @@
 .header__icon {
   width: 20px;
   height: 20px;
+}
+
+.cart-icon {
+  position: relative;
+}
+
+.cart-badge {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 4px;
+  background: var(--color-pink);
+  color: var(--color-white);
+  border-radius: 9px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-heading);
+  font-size: 0.625rem;
+  font-weight: var(--font-weight-black);
+  border: 2px solid var(--color-bg-primary);
+  line-height: 1;
+  z-index: 10;
 }
 
 .navbar-dropdown {

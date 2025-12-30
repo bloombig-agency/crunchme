@@ -1,33 +1,34 @@
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { CartProvider } from './contexts/CartContext'
 import Header from './components/Header'
-import Hero from './components/Hero'
-import ScrollingTicker from './components/ScrollingTicker'
-import JustDropped from './components/JustDropped'
-import FeaturedProducts from './components/FeaturedProducts'
-import Products from './components/Products'
-import About from './components/About'
-import PromotionBanner from './components/PromotionBanner'
-import InteractiveFeatures from './components/InteractiveFeatures'
 import Footer from './components/Footer'
-import { TICKER_ITEMS } from './data/constants'
+import Home from './pages/Home'
+import Shop from './pages/Shop'
+import ProductDetail from './pages/ProductDetail'
+import Cart from './pages/Cart'
+import Checkout from './pages/Checkout'
 import './styles/base.css'
 import './App.css'
 
 function App() {
   return (
-    <div className="app">
-      <Header />
-      <main>
-        <Hero />
-        <ScrollingTicker items={TICKER_ITEMS} />
-        <JustDropped />
-        <FeaturedProducts />
-        <Products />
-        <PromotionBanner />
-        <About />
-        <InteractiveFeatures />
-      </main>
-      <Footer />
-    </div>
+    <CartProvider>
+      <Router>
+        <div className="app">
+          <Header />
+          <main>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/shop" element={<Shop />} />
+              <Route path="/product/:id" element={<ProductDetail />} />
+              <Route path="/cart" element={<Cart />} />
+              <Route path="/checkout" element={<Checkout />} />
+            </Routes>
+          </main>
+          <Footer />
+        </div>
+      </Router>
+    </CartProvider>
   )
 }
 

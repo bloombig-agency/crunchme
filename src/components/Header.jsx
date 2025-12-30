@@ -1,11 +1,15 @@
 import { useState, useEffect } from 'react'
-import { HiShoppingCart, HiMenu, HiX, HiSearch } from 'react-icons/hi'
+import { Link, useNavigate } from 'react-router-dom'
+import { HiShoppingCart, HiMenu, HiX } from 'react-icons/hi'
+import { useCart } from '../contexts/CartContext'
 import './Header.css'
 
 function Header() {
+  const navigate = useNavigate()
+  const { getCartItemCount, setIsCartOpen } = useCart()
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
-  const [isShopMenuOpen, setIsShopMenuOpen] = useState(false)
+  const cartCount = getCartItemCount()
 
   useEffect(() => {
     const handleScroll = () => {
@@ -54,68 +58,27 @@ function Header() {
 
                 <div className="header__menu header__menu--left">
                   <div className={`header__menu-items header__dropdown--below-parent is-flex is-flex-wrap is-justify-flex-end ${isMobileMenuOpen ? 'mobile-open' : ''}`}>
-                    <div 
-                      className="navbar-item header__item has-dropdown has-dropdown--vertical is-hoverable has-mega-menu"
-                      onMouseEnter={() => setIsShopMenuOpen(true)}
-                      onMouseLeave={() => setIsShopMenuOpen(false)}
-                    >
-                      <a 
-                        className="navbar-link header__link is-arrowless" 
-                        aria-haspopup="true" 
-                        aria-expanded={isShopMenuOpen}
-                        href="#products"
+                    <div className="navbar-item header__item">
+                      <Link 
+                        to="/shop"
+                        className="navbar-link header__link is-arrowless"
                       >
                         SHOP
-                      </a>
+                      </Link>
                       <span className="headerlink_spacer">SHOP</span>
-
-                      {isShopMenuOpen && (
-                        <div className="navbar-dropdown navbar-dropdown--below-parent is-vertical has-large-vertical-spacing">
-                          <div className="mega-menu mega-menu--header-centered">
-                            <div className="container has-no-side-gutter">
-                              <div className="column mega-menu__block block__menu one-fourth medium-down--one-half">
-                                <div className="mega-menu__content">
-                                  <div className="mega-menu__linklist">
-                                    <p className="menu__heading">
-                                      <a href="#products">SHOP CRUNCHME</a>
-                                    </p>
-                                    <ul>
-                                      <li><a href="#products" className="mega-menu__linklist-link">PROTEIN BARS</a></li>
-                                      <li><a href="#products" className="mega-menu__linklist-link">BUNDLES</a></li>
-                                      <li><a href="#products" className="mega-menu__linklist-link">ALL PRODUCTS</a></li>
-                                    </ul>
-                                  </div>
-                                </div>
-                              </div>
-                              <div className="column mega-menu__block block__menu one-fourth medium-down--one-half">
-                                <div className="mega-menu__content">
-                                  <div className="mega-menu__linklist">
-                                    <p className="menu__heading">FEATURED FLAVORS</p>
-                                    <ul>
-                                      <li><a href="#products" className="mega-menu__linklist-link">PEANUT RAMPAGE</a></li>
-                                      <li><a href="#products" className="mega-menu__linklist-link">BERRY BLASTZ</a></li>
-                                      <li><a href="#products" className="mega-menu__linklist-link">CHOCO SHATTER</a></li>
-                                    </ul>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      )}
                     </div>
 
                     <div className="navbar-item header__item">
-                      <a href="#about" className="navbar-link header__link is-arrowless">
+                      <Link to="/#about" className="navbar-link header__link is-arrowless">
                         ABOUT
-                      </a>
+                      </Link>
                       <span className="headerlink_spacer">ABOUT</span>
                     </div>
 
                     <div className="navbar-item header__item">
-                      <a href="#contact" className="navbar-link header__link is-arrowless">
+                      <Link to="/#contact" className="navbar-link header__link is-arrowless">
                         CONTACT
-                      </a>
+                      </Link>
                       <span className="headerlink_spacer">CONTACT</span>
                     </div>
                   </div>
@@ -123,7 +86,7 @@ function Header() {
 
                 <div className="header__brand is-align-center is-justify-space-between is-flex text-align-center">
                   <h1 className="visually-hidden">CRUNCHME</h1>
-                  <a className="header__logo header__link primary-logo" href="/" title="CRUNCHME">
+                  <Link to="/" className="header__logo header__link primary-logo" title="CRUNCHME">
                     <img 
                       src="/images/logo.png" 
                       alt="CRUNCHME Logo" 
@@ -134,23 +97,27 @@ function Header() {
                       }}
                     />
                     <span className="logo-text" style={{ display: 'none' }}>CRUNCHME</span>
-                  </a>
+                  </Link>
                 </div>
 
                 <div className="header__icons header__icon-style- header__icons--sticky">
                   <div className="header__link">
-                    <a className="header__link action-area__link search-icon" tabIndex={0}>
-                      <span className="icon header__icon" data-icon="search-prime">
-                        <HiSearch />
-                      </span>
-                    </a>
-                  </div>
-                  <div className="header__link">
-                    <a className="header__link action-area__link cart-icon" tabIndex={0}>
+                    <button 
+                      className="header__link action-area__link cart-icon" 
+                      tabIndex={0}
+                      onClick={() => {
+                        navigate('/cart')
+                        setIsCartOpen(true)
+                      }}
+                      aria-label={`Shopping cart${cartCount > 0 ? ` (${cartCount} items)` : ''}`}
+                    >
                       <span className="icon header__icon" data-icon="cart">
                         <HiShoppingCart />
                       </span>
-                    </a>
+                      {cartCount > 0 && (
+                        <span className="cart-badge">{cartCount > 99 ? '99+' : cartCount}</span>
+                      )}
+                    </button>
                   </div>
                 </div>
               </nav>

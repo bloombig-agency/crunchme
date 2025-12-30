@@ -1,8 +1,10 @@
 import { useState, memo } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { HiShoppingCart } from 'react-icons/hi'
 import './ProductCard.css'
 
 function ProductCard({ product, onAddToCart }) {
+  const navigate = useNavigate()
   if (!product) {
     return null
   }
@@ -12,7 +14,14 @@ function ProductCard({ product, onAddToCart }) {
       <div className="product-wrap">
         <div className="product-image__wrapper">
           <div className="image__container product__imageContainer">
-            <a href={`#product-${product.id}`} aria-label={product.name || 'Product'}>
+            <a 
+              href={`/product/${product.id}`}
+              aria-label={product.name || 'Product'}
+              onClick={(e) => {
+                e.preventDefault()
+                navigate(`/product/${product.id}`)
+              }}
+            >
               {product.badge && (
                 <div className="sticker-holder sticker-shape-square sticker-position-left">
                   <div className="sticker-holder__content sticker-holder__content--product">
@@ -62,12 +71,12 @@ function ProductCard({ product, onAddToCart }) {
               <div className="purchase-details">
                 <div className="purchase-details__buttons">
                   <a 
-                    href={`#product-${product.id}`}
+                    href={`/product/${product.id}`}
                     aria-label="Learn More"
                     className="button button--primary"
                     onClick={(e) => {
                       e.preventDefault()
-                      onAddToCart?.(product)
+                      navigate(`/product/${product.id}`)
                     }}
                   >
                     Learn More

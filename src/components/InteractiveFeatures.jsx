@@ -1,13 +1,17 @@
 import { HiSparkles, HiFire, HiShoppingCart } from 'react-icons/hi'
 import { GiChocolateBar } from 'react-icons/gi'
+import { useViewportAnimation, useStaggeredAnimation } from '../hooks/useViewportAnimation'
 import './InteractiveFeatures.css'
 
 function InteractiveFeatures() {
+  const [sectionRef, isSectionVisible] = useViewportAnimation({ threshold: 0.05, rootMargin: '0px 0px -100px 0px' })
+  const [cardRefs, cardVisible] = useStaggeredAnimation(3, { threshold: 0.05, rootMargin: '0px 0px -100px 0px' })
+
   return (
-    <section className="interactive-features-section">
+    <section className={`interactive-features-section ${isSectionVisible ? 'is-visible' : ''}`} ref={sectionRef}>
       <div className="interactive-features-container">
         <div className="features-grid">
-          <div className="feature-card feature-card-chocolate">
+          <div className={`feature-card feature-card-chocolate ${cardVisible[0] ? 'is-visible' : ''}`} ref={cardRefs[0]}>
             <div className="feature-icon">
               <GiChocolateBar />
             </div>
@@ -17,7 +21,7 @@ function InteractiveFeatures() {
             </p>
           </div>
 
-          <div className="feature-card">
+          <div className={`feature-card ${cardVisible[1] ? 'is-visible' : ''}`} ref={cardRefs[1]}>
             <div className="feature-icon">
               <HiSparkles />
             </div>
@@ -27,7 +31,7 @@ function InteractiveFeatures() {
             </p>
           </div>
 
-          <div className="feature-card">
+          <div className={`feature-card ${cardVisible[2] ? 'is-visible' : ''}`} ref={cardRefs[2]}>
             <div className="feature-icon">
               <HiFire />
             </div>

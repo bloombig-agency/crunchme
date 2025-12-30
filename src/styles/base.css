@@ -8,6 +8,21 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 80px; /* Account for fixed header */
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
 
 body {
@@ -19,6 +34,15 @@ body {
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
   transition: background-color var(--transition-base), color var(--transition-base);
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+}
+
+/* Adaptive scrolling container */
+.app {
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
 }
 
 /* Removed neon glow effects */
@@ -115,8 +139,24 @@ button {
 ::-webkit-scrollbar-thumb {
   background: var(--color-pink);
   border-radius: var(--radius-full);
+  transition: background 0.2s ease;
 }
 
 ::-webkit-scrollbar-thumb:hover {
   background: var(--color-pink-dark);
+}
+
+/* Mobile scrollbar */
+@media (max-width: 640px) {
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+}
+
+/* Smooth scroll behavior for scrollable containers */
+.scroll-container,
+[data-scroll-container] {
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
 }

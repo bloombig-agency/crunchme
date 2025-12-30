@@ -1,10 +1,17 @@
+import { useNavigate } from 'react-router-dom'
 import { HiSparkles, HiLightningBolt, HiCheckCircle } from 'react-icons/hi'
 import { GiChocolateBar } from 'react-icons/gi'
+import { useViewportAnimation, useStaggeredAnimation } from '../hooks/useViewportAnimation'
 import './About.css'
 
 function About() {
+  const navigate = useNavigate()
+  const [sectionRef, isSectionVisible] = useViewportAnimation({ threshold: 0.05, rootMargin: '0px 0px -100px 0px' })
+  const [chocolateRef, isChocolateVisible] = useViewportAnimation({ threshold: 0.05, rootMargin: '0px 0px -100px 0px' })
+  const [featureRefs, featureVisible] = useStaggeredAnimation(4, { threshold: 0.05, rootMargin: '0px 0px -100px 0px' })
+
   return (
-    <section className="manifesto-section" id="about">
+    <section className={`manifesto-section ${isSectionVisible ? 'is-visible' : ''}`} id="about" ref={sectionRef}>
       <div className="manifesto-container">
         <div className="manifesto-content">
           <div className="manifesto-visual">
@@ -34,8 +41,12 @@ function About() {
             </p>
 
             <div className="manifesto-features">
-              {['22g Protein', 'Zero Sugar', 'All Natural', 'Gluten Free'].map((feature) => (
-                <div key={feature} className="feature-item">
+              {['22g Protein', 'Zero Sugar', 'All Natural', 'Gluten Free'].map((feature, index) => (
+                <div 
+                  key={feature} 
+                  className={`feature-item ${featureVisible[index] ? 'is-visible' : ''}`}
+                  ref={featureRefs[index]}
+                >
                   <div className="feature-dot"></div>
                   <span className="feature-text">{feature}</span>
                 </div>
@@ -45,7 +56,7 @@ function About() {
         </div>
       </div>
       
-      <div className="chocolate-showcase-section">
+      <div className={`chocolate-showcase-section ${isChocolateVisible ? 'is-visible' : ''}`} ref={chocolateRef}>
         <div className="chocolate-showcase-container">
           <div className="chocolate-content">
             <div className="chocolate-label">Premium Craft</div>
@@ -86,7 +97,14 @@ function About() {
                 </div>
               </div>
             </div>
-            <a href="#products" className="chocolate-cta">
+            <a 
+              href="/shop"
+              className="chocolate-cta"
+              onClick={(e) => {
+                e.preventDefault()
+                navigate('/shop')
+              }}
+            >
               Explore Chocolate Collection
             </a>
           </div>

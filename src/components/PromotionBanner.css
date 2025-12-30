@@ -4,6 +4,14 @@
   background: var(--color-bg-primary);
   border-top: 1px solid rgba(62, 39, 35, 0.2);
   border-bottom: 1px solid rgba(62, 39, 35, 0.2);
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.promotion-showcase-section.is-visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .promotion-showcase-container {

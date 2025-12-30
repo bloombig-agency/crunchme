@@ -186,3 +186,89 @@ export const ANIMATION_DELAYS = {
   PROMO_RESUME: 10000
 }
 
+// Product Reviews
+export const REVIEWS = [
+  {
+    id: 1,
+    productId: 1,
+    name: 'Sarah M.',
+    rating: 5,
+    date: '2024-01-15',
+    comment: 'Absolutely love these bars! The peanut flavor is rich and satisfying. Perfect for my post-workout snack.',
+    verified: true
+  },
+  {
+    id: 2,
+    productId: 1,
+    name: 'Mike T.',
+    rating: 5,
+    date: '2024-01-10',
+    comment: 'Best protein bar I\'ve tried. No artificial taste and keeps me full for hours.',
+    verified: true
+  },
+  {
+    id: 3,
+    productId: 2,
+    name: 'Emma L.',
+    rating: 5,
+    date: '2024-01-20',
+    comment: 'Berry Blastz is my new favorite! The perfect balance of sweet and protein.',
+    verified: true
+  },
+  {
+    id: 4,
+    productId: 3,
+    name: 'John D.',
+    rating: 5,
+    date: '2024-01-18',
+    comment: 'Choco Shatter is incredible! Rich chocolate taste with amazing texture.',
+    verified: true
+  }
+]
+
+// Nutrition Facts Template
+export const NUTRITION_FACTS = {
+  1: {
+    servingSize: '1 bar (100g)',
+    calories: 250,
+    totalFat: '8g',
+    saturatedFat: '2g',
+    transFat: '0g',
+    cholesterol: '0mg',
+    sodium: '120mg',
+    totalCarbs: '25g',
+    dietaryFiber: '5g',
+    sugars: '8g',
+    protein: '22g',
+    ingredients: ['Peanuts', 'Protein Blend (Pea, Rice)', 'Dates', 'Almonds', 'Natural Flavors', 'Sea Salt']
+  },
+  2: {
+    servingSize: '1 bar (100g)',
+    calories: 240,
+    totalFat: '7g',
+    saturatedFat: '1.5g',
+    transFat: '0g',
+    cholesterol: '0mg',
+    sodium: '110mg',
+    totalCarbs: '24g',
+    dietaryFiber: '6g',
+    sugars: '7g',
+    protein: '22g',
+    ingredients: ['Mixed Berries', 'Protein Blend (Pea, Rice)', 'Almonds', 'Dates', 'Natural Flavors', 'Sea Salt']
+  },
+  3: {
+    servingSize: '1 bar (100g)',
+    calories: 260,
+    totalFat: '9g',
+    saturatedFat: '3g',
+    transFat: '0g',
+    cholesterol: '0mg',
+    sodium: '130mg',
+    totalCarbs: '26g',
+    dietaryFiber: '4g',
+    sugars: '9g',
+    protein: '22g',
+    ingredients: ['Dark Chocolate', 'Almonds', 'Protein Blend (Pea, Rice)', 'Dates', 'Cocoa Powder', 'Natural Flavors', 'Sea Salt']
+  }
+}
+

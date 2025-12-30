@@ -1,13 +1,18 @@
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { PRODUCTS } from '../data/constants'
+import { useViewportAnimation, useStaggeredAnimation } from '../hooks/useViewportAnimation'
 import './FeaturedProducts.css'
 
 function FeaturedProducts() {
+  const navigate = useNavigate()
   const featuredProducts = PRODUCTS.slice(0, 3)
   const [hoveredIndex, setHoveredIndex] = useState(null)
+  const [sectionRef, isSectionVisible] = useViewportAnimation({ threshold: 0.05, rootMargin: '0px 0px -100px 0px' })
+  const [cardRefs, cardVisible] = useStaggeredAnimation(featuredProducts.length, { threshold: 0.05, rootMargin: '0px 0px -100px 0px' })
 
   return (
-    <section className="featured-innovative" id="featured">
+    <section className={`featured-innovative ${isSectionVisible ? 'is-visible' : ''}`} id="featured" ref={sectionRef}>
       <div className="featured-container-innovative">
         <div className="featured-header-innovative">
           <div className="header-badge-innovative">
@@ -27,12 +32,20 @@ function FeaturedProducts() {
           {featuredProducts.map((product, index) => (
             <div
               key={product.id}
-              className={`featured-card-innovative card-${index + 1} ${hoveredIndex === index ? 'hovered' : ''}`}
+              className={`featured-card-innovative card-${index + 1} ${hoveredIndex === index ? 'hovered' : ''} ${cardVisible[index] ? 'is-visible' : ''}`}
+              ref={cardRefs[index]}
               onMouseEnter={() => setHoveredIndex(index)}
               onMouseLeave={() => setHoveredIndex(null)}
               style={{ '--card-delay': `${index * 0.1}s` }}
             >
-              <a href={`#product-${product.id}`} className="card-link-innovative">
+              <a 
+                href={`/product/${product.id}`}
+                className="card-link-innovative"
+                onClick={(e) => {
+                  e.preventDefault()
+                  navigate(`/product/${product.id}`)
+                }}
+              >
                 <div className="card-image-wrapper-innovative">
                   <div className="card-badge-innovative">
                     {product.badge || 'Popular'}
@@ -81,7 +94,14 @@ function FeaturedProducts() {
         </div>
 
         <div className="featured-footer-innovative">
-          <a href="#products" className="cta-view-all">
+          <a 
+            href="/shop"
+            className="cta-view-all"
+            onClick={(e) => {
+              e.preventDefault()
+              navigate('/shop')
+            }}
+          >
             <span className="cta-text">Explore Full Collection</span>
             <div className="cta-icon-wrapper">
               <span className="cta-icon">→</span>
