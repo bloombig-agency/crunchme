@@ -156,6 +156,6 @@ section {
 }
 
 /* Elegant transitions - exclude header/navbar elements */
-*:not(header):not(header *):not(.section):not(.navbar):not(.header__*):not(footer):not(footer *) {
+*:not(header):not(header *):not(.section):not(.navbar):not(footer):not(footer *) {
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
