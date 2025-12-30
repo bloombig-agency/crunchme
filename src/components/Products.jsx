@@ -1,13 +1,18 @@
+import { useNavigate } from 'react-router-dom'
 import { GiChocolateBar } from 'react-icons/gi'
 import { PRODUCTS } from '../data/constants'
+import { useViewportAnimation, useStaggeredAnimation } from '../hooks/useViewportAnimation'
 import './Products.css'
 
 function Products() {
+  const navigate = useNavigate()
   const chocolateProducts = PRODUCTS.filter(p => p.name.toLowerCase().includes('choco'))
   const allProducts = PRODUCTS
+  const [sectionRef, isSectionVisible] = useViewportAnimation({ threshold: 0.05, rootMargin: '0px 0px -100px 0px' })
+  const [productRefs, productVisible] = useStaggeredAnimation(allProducts.length, { threshold: 0.05, rootMargin: '0px 0px -100px 0px' })
 
   return (
-    <section id="products" className="products-showcase-section">
+    <section id="products" className={`products-showcase-section ${isSectionVisible ? 'is-visible' : ''}`} ref={sectionRef}>
       <div className="products-showcase-container">
         <div className="section-header">
           <div className="section-label">
@@ -38,9 +43,20 @@ function Products() {
               </p>
             </div>
             <div className="products-showcase-grid chocolate-grid">
-              {allProducts.map((product) => (
-                <div key={product.id} className={`product-showcase-card ${chocolateProducts.some(p => p.id === product.id) ? 'chocolate-card' : ''}`}>
-                  <a href={`#product-${product.id}`} className="product-card-link">
+              {allProducts.map((product, index) => (
+                <div 
+                  key={product.id} 
+                  className={`product-showcase-card ${chocolateProducts.some(p => p.id === product.id) ? 'chocolate-card' : ''} ${productVisible[index] ? 'is-visible' : ''}`}
+                  ref={productRefs[index]}
+                >
+                  <a 
+                    href={`/product/${product.id}`} 
+                    className="product-card-link"
+                    onClick={(e) => {
+                      e.preventDefault()
+                      navigate(`/product/${product.id}`)
+                    }}
+                  >
                     <div className="product-card-image-area">
                       {product.badge && (
                         <div className={`product-badge-tag ${chocolateProducts.some(p => p.id === product.id) ? 'chocolate-badge' : ''}`}>

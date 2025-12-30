@@ -1,6 +1,8 @@
 import { useMemo } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { HiGift, HiSparkles, HiTag, HiFire, HiStar, HiTruck, HiHeart } from 'react-icons/hi'
 import { useAutoRotate } from '../hooks/useAutoRotate'
+import { useViewportAnimation } from '../hooks/useViewportAnimation'
 import { PROMOTIONS, ANIMATION_DELAYS } from '../data/constants'
 import './PromotionBanner.css'
 
@@ -14,11 +16,13 @@ const iconMap = {
 }
 
 function PromotionBanner() {
+  const navigate = useNavigate()
   const { currentIndex, setCurrentIndex, isPaused, setIsPaused } = useAutoRotate(
     PROMOTIONS.length,
     ANIMATION_DELAYS.PROMO_ROTATION,
     true
   )
+  const [sectionRef, isSectionVisible] = useViewportAnimation({ threshold: 0.05, rootMargin: '0px 0px -100px 0px' })
 
   const promotionsWithIcons = useMemo(() => 
     PROMOTIONS.map(promo => {
@@ -38,7 +42,7 @@ function PromotionBanner() {
   }
 
   return (
-    <section className="promotion-showcase-section">
+    <section className={`promotion-showcase-section ${isSectionVisible ? 'is-visible' : ''}`} ref={sectionRef}>
       <div className="promotion-showcase-container">
         <div 
           className="promotion-showcase-card"
@@ -70,7 +74,14 @@ function PromotionBanner() {
             <h3 className="promotion-heading">{promo.title}</h3>
             <p className="promotion-text">{promo.description}</p>
             <div className="promotion-highlight">{promo.highlight}</div>
-            <a href="#products" className="promotion-cta">
+            <a 
+              href="/shop"
+              className="promotion-cta"
+              onClick={(e) => {
+                e.preventDefault()
+                navigate('/shop')
+              }}
+            >
               {promo.cta}
             </a>
           </div>

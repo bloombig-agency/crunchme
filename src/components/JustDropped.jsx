@@ -1,16 +1,21 @@
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { HiLightningBolt, HiSparkles, HiFire, HiCheckCircle } from 'react-icons/hi'
 import { PRODUCTS } from '../data/constants'
+import { useViewportAnimation, useStaggeredAnimation } from '../hooks/useViewportAnimation'
 import './JustDropped.css'
 
 function JustDropped() {
+  const navigate = useNavigate()
   const latestProduct = PRODUCTS[0]
   const [hoveredFeature, setHoveredFeature] = useState(null)
+  const [sectionRef, isSectionVisible] = useViewportAnimation({ threshold: 0.05, rootMargin: '0px 0px -100px 0px' })
+  const [featureRefs, featureVisible] = useStaggeredAnimation(3, { threshold: 0.05, rootMargin: '0px 0px -100px 0px' })
 
   if (!latestProduct) return null
 
   return (
-    <section className="just-dropped-innovative">
+    <section className={`just-dropped-innovative ${isSectionVisible ? 'is-visible' : ''}`} ref={sectionRef}>
       <div className="jd-container">
         <div className="jd-header-innovative">
           <div className="jd-badge-innovative">
@@ -69,7 +74,8 @@ function JustDropped() {
               ].map((item, index) => (
                 <div 
                   key={index}
-                  className={`nutrition-card ${item.highlight ? 'highlight' : ''}`}
+                  className={`nutrition-card ${item.highlight ? 'highlight' : ''} ${featureVisible[index] ? 'is-visible' : ''}`}
+                  ref={featureRefs[index]}
                 >
                   <div className="nutrition-icon">{item.icon}</div>
                   <div className="nutrition-value">{item.value}</div>
@@ -93,11 +99,25 @@ function JustDropped() {
             </div>
 
             <div className="jd-actions-innovative">
-              <a href={`#product-${latestProduct.id}`} className="action-btn-primary">
+              <a 
+                href={`/product/${latestProduct.id}`}
+                className="action-btn-primary"
+                onClick={(e) => {
+                  e.preventDefault()
+                  navigate(`/product/${latestProduct.id}`)
+                }}
+              >
                 <span>Explore</span>
                 <div className="btn-arrow">→</div>
               </a>
-              <a href="#products" className="action-btn-secondary">
+              <a 
+                href="/shop"
+                className="action-btn-secondary"
+                onClick={(e) => {
+                  e.preventDefault()
+                  navigate('/shop')
+                }}
+              >
                 View All
               </a>
             </div>

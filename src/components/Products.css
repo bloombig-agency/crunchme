@@ -4,6 +4,14 @@
   background: var(--color-bg-secondary);
   border-top: 1px solid rgba(62, 39, 35, 0.2);
   border-bottom: 1px solid rgba(62, 39, 35, 0.2);
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.products-showcase-section.is-visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .products-showcase-container {
@@ -86,6 +94,8 @@
   scroll-behavior: smooth;
   -webkit-overflow-scrolling: touch;
   padding-bottom: var(--space-4);
+  scroll-snap-type: x mandatory;
+  scroll-padding: var(--space-4);
 }
 
 .products-showcase-grid::-webkit-scrollbar {
@@ -111,11 +121,19 @@
   border: 2px solid rgba(255, 255, 255, 0.15);
   border-radius: var(--radius-xl);
   overflow: hidden;
-  transition: all var(--transition-base);
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
   flex: 0 0 auto;
   width: 350px;
   min-width: 300px;
+  scroll-snap-align: start;
+  opacity: 0;
+  transform: translateY(30px) scale(0.95);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out, border-color var(--transition-base), background var(--transition-base), box-shadow var(--transition-base);
+}
+
+.product-showcase-card.is-visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
 }
 
 .product-showcase-card:hover {
@@ -373,6 +391,8 @@
   overflow-y: hidden;
   scroll-behavior: smooth;
   -webkit-overflow-scrolling: touch;
+  scroll-snap-type: x mandatory;
+  scroll-padding: var(--space-4);
   padding-bottom: var(--space-4);
 }
 
@@ -401,6 +421,7 @@
   flex: 0 0 auto;
   width: 350px;
   min-width: 300px;
+  scroll-snap-align: start;
 }
 
 .chocolate-grid .product-showcase-card:hover {
